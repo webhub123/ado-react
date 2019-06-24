@@ -64,7 +64,7 @@ class ChatPage extends Component {
 
     keyPress(e){
         const { message } = this.state
-        if(e.keyCode == 13)
+        if(e.keyCode == 13 && !e.shiftKey)
             this.socket.emit('new_message', message)
      }
 
@@ -76,7 +76,7 @@ class ChatPage extends Component {
                     <Row >
                         <Col lg={12} md={12} sm={12}>
                             <Label for="username" >Username</Label>
-                            <Input type="textarea" name="username" id="username" bsSize='sm' value={username} onChange={this.handleChange} />
+                            <Input type="text" name="username" id="username" bsSize='sm' value={username} onChange={this.handleChange} />
                         </Col>
                     </Row>
                 </FormGroup>
@@ -128,7 +128,7 @@ class ChatPage extends Component {
                             </div>
                             <div className="type_msg">
                                 <div className="input_msg_write">
-                                    <input type="text" className="write_msg" id='message' name='message' placeholder="Type a message" onKeyDown={this.keyPress} value={message} onChange={this.handleChange} />
+                                    <input type="textarea" className="write_msg" id='message' name='message' placeholder="Type a message" onKeyDown={this.keyPress} value={message} onChange={this.handleChange} />
                                     <Button className="msg_send_btn" >
                                         <FaPaperPlane/>
                                     </Button>
