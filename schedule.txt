@@ -1,0 +1,137 @@
+                {/* <Container className='mt-5 '>
+                    <Card>
+                        <CardHeader align="center">
+                            <h3>Callback Appointment</h3>
+                            <small>+81 232 22213</small>
+                        </CardHeader >               
+         
+                        <CardBody>
+                            <Form>
+                            
+                                <FormGroup>
+                                    <Label for="name">
+                                        Name 
+                                        <span className="text-danger"> *</span>    
+                                    </Label>
+                                    <Input
+                                        type="text"
+                                        name="name"
+                                        id="name"
+                                        onChange={this.handleChange}
+                                        value={name}
+                                    />
+                                  
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="phone_number">
+                                        Phone Number 
+                                        <span className="text-danger"> *</span>                                            
+                                    </Label>
+                                    <Input
+                                        type="number"
+                                        name="phone_number"
+                                        id="phone_number"
+                                        onChange={this.handleChange}
+                                        value={phoneNumber}
+
+                                    />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="date">
+                                        Date 
+                                        <span className="text-danger"> *</span>    
+                                    </Label>
+                                    <br />
+
+                                    <DatePicker 
+                                        dateFormat="yyyy-MM-dd"
+                                        selected={date}
+                                        onChange={this.handleChangeDate}
+                                        id="date" 
+                                        name="date"
+                                        className="form-control" 
+                                        withPortal
+                                        minDate={new Date()}
+                                        
+                                    />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="from">From</Label>
+                                    <br />
+                                    <DatePicker 
+                                        onChange={this.handleChangeFrom}
+                                        selected={from}
+                                        showTimeSelect
+                                        showTimeSelectOnly
+                                        timeFormat="HH:mm"
+                                        dateFormat="HH:mm"
+                                        timeIntervals={10}
+                                        timeCaption="From" 
+                                        id="from" 
+                                        name="from"
+                                        className="form-control" 
+                                        withPortal
+                                        isClearable={true}
+                                        disabledKeyboardNavigation
+                                        //excludeTimes={[23]}
+                                        minTime={setMinDate}
+                                        maxTime={new Date(new Date().setHours(23,50,0))}
+                                    />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="to">To </Label>
+                                    <br />
+                                    <DatePicker 
+                                        onChange={this.handleChangeTo}
+                                        selected={to}
+                                        showTimeSelect
+                                        showTimeSelectOnly
+                                        timeFormat="HH:mm"
+                                        dateFormat="HH:mm"
+                                        timeIntervals={10}
+                                        timeCaption="To"
+                                        id="to" 
+                                        name="to"
+                                        className="form-control" 
+                                        withPortal
+                                        isClearable={true}
+                                        disabledKeyboardNavigation
+                                        minTime={setMinDate}
+                                        maxTime={new Date(new Date().setHours(23,50,0))}
+                                    />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="memo">Memo</Label>
+                                    <Input
+                                        type="textarea"
+                                        name="memo"
+                                        id="memo"
+                                        onChange={this.handleChange}
+                                        value={memo}
+                                        maxLength={500}
+                                        placeholder="Maximum of 500 characters only."
+                                    />
+
+                                    <FormText>{ (memoLength <= 0) ? 0 : memoLength } characters remaining.</FormText>
+                                </FormGroup>
+                            </Form>
+                        </CardBody>
+                        <CardFooter>
+                            <Button
+                                className="tmj-btn-primary btn-block btn-lg tmj-btn"
+                                onClick={()=>{this.onSubmitSchedule()}}
+                                disabled={loading}
+                            >
+                                Submit
+                            </Button>
+                            <Button
+                                className="btn-block tmj-btn btn-lg"
+                                color="secondary"
+                                //onClick={()=>{history.back()}}
+                                disabled={loading}
+                            >
+                                Back
+                            </Button>
+                        </CardFooter>
+                    </Card>
+                </Container> */}
