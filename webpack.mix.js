@@ -13,7 +13,7 @@ let mix = require('laravel-mix');
 mix
     .webpackConfig(require('./webpack.config'))
     .setPublicPath('public')
-    .react('resources/assets/js/page/app/index.js', 'public/js/')
+    .react('resources/assets/js/app.js', 'public/js/')
 
 // Full API
 // mix.js(src, output);

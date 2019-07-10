@@ -3,13 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 
 import Formsy from 'formsy-react'; 
-import Loadable from 'react-loadable';
 import Select from 'react-select';
+import Input from '../../shared/Input';
 
-import ErrorLoading from '../components/error_page/ErrorLoading';   
-import { saveProfile } from '../actions/profileActions';   
- 
-const Input = Loadable({ loader: () => import('../components/fields/Input'), loading : ErrorLoading });
+import { saveProfile } from '../profile-actions';
 
 class CreateProfile extends Component {
 
@@ -88,6 +85,7 @@ class CreateProfile extends Component {
         return (
             <Formsy onValidSubmit={() => this.saveProf() } onValid={() => this.valid()} onInvalid={() => this.inValid()}>
                 <div className="container col-sm-offset-3 col-sm-6">
+                    <br />
                     <h3>Create Profile </h3>
                     <hr/> 
                     <div className="row">
@@ -180,8 +178,8 @@ class CreateProfile extends Component {
 const mapStateToProps = (state) => {
 
     return {
-        loading : state.loading,
-        skills : state.skills
+        loading : state.profile.loading,
+        skills : state.profile.skills
     };
 }
 

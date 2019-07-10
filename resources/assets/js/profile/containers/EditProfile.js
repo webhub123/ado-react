@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Formsy from 'formsy-react'; 
-import Loadable from 'react-loadable';
 import { Link } from "react-router-dom";
 import Select from 'react-select';
+import Input from '../../shared/Input';
 
-import { retrieveProfile, editProfile } from '../actions/profileActions';
-import ErrorLoading from '../components/error_page/ErrorLoading';   
+import { retrieveProfile, editProfile } from '../profile-actions';
 
-const Input = Loadable({ loader: () => import('../components/fields/Input'), loading : ErrorLoading });
 
 class EditProfile extends Component {
 
@@ -106,6 +104,7 @@ class EditProfile extends Component {
         return (
             <Formsy onValidSubmit={() => this.updateProf() } onValid={() => this.valid()} onInvalid={() => this.inValid()}>
                 <div className="container col-sm-offset-3 col-sm-6">
+                    <br />
                     <h3>Edit Profile </h3>
                     <hr/>
                     <div className="row">
@@ -195,10 +194,10 @@ class EditProfile extends Component {
 const mapStateToProps = (state) => {
 
     return {
-        list : state.profile,
-        loading : state.loading,
-        skills : state.skills,
-        skillValues : state.profile      
+        list : state.profile.profile,
+        loading : state.profile.loading,
+        skills : state.profile.skills,
+        skillValues : state.profile.profile      
     };
 }
 

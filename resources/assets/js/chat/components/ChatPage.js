@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { FormText, FormFeedback, Button, Row, Container, Col, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Row, Container, Col, FormGroup, Label, Input } from 'reactstrap';
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import axios from 'axios';
-import './style/chat.css'
+import '../../shared/styles/chat.css'
 import { FaPaperPlane } from 'react-icons/fa';
 import io from 'socket.io-client'
 
@@ -54,6 +53,8 @@ class ChatPage extends Component {
         this.socket.on('received_message', data => {
             this.setState({ messageList: data })
         })
+
+        document.title = 'Chaaaat! Page'
     }
 
     saveUser() {

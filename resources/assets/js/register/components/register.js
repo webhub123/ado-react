@@ -6,6 +6,7 @@ class RegisterPage extends Component {
     
         return (
             <div className="container col-sm-offset-4 col-sm-4">
+                <br />
                 <h3>Register </h3>
                 <hr/>
                 <div className="form-group">

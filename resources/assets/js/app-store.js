@@ -7,14 +7,14 @@ import thunk from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' 
 
-import profileReducer from './reducers/profileReducer';
+import Reducers from './app-reducers';
 
 const persistConfig = {
     key : 'root',
     storage
 }
 
-const persistedReducer = persistReducer(persistConfig, profileReducer)
+const persistedReducer = persistReducer(persistConfig, Reducers)
 
 const middleware = applyMiddleware(
     thunk,

@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import ReactTable from "react-table";
 import 'react-table/react-table.css'
 
-import { setProfile, removeProfile } from '../actions/profileActions';
+import { setProfile, removeProfile } from '../profile-actions';
 
 class ProfileLists extends Component {
 
@@ -72,10 +72,14 @@ class ProfileLists extends Component {
         
         return (
             <div className="container">
+                <br/>
                 <div className="row ">
-                    <h3 className="col-sm-2">Profile List </h3>
-                    <Link to="/create" disabled={ loading } className="btn btn-primary btn-sm pull-right btn-mrg-top" >Add New</Link>
-                    
+                    <div className="col-6">
+                        <h3>Profile List </h3>
+                    </div>
+                    <div className="col-6">
+                        <Link to="/create" disabled={ loading } className="btn btn-primary btn-sm float-right" >Add New</Link>
+                    </div>
                 </div>
                 <hr/>
                 <div className="row ">
@@ -99,8 +103,8 @@ class ProfileLists extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        list : state.list,
-        loading : state.loading
+        list : state.profile.list,
+        loading : state.profile.loading
     };
 }
 
