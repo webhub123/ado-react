@@ -20,7 +20,7 @@ Route.group(() => {
 
 }).prefix('api')
 
-Route.post('/bill/add-new', 'TestController.addBill');
+Route.get('/translation.js', 'TranslationController.index');
 
 
 Route.any('*', ({ view }) => view.render('welcome'))

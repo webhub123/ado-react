@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { FormText, FormFeedback, Button, Row, Container, Col, FormGroup, Label, Input } from 'reactstrap';
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import axios from 'axios'; 
@@ -18,42 +17,38 @@ class TestPage extends Component {
 
     componentDidMount(){
  
-        let data = [
-            { username: 'u1', password: '1', first_name: 'a', middle_name: 'b', last_name: 'c', email: 'a@email.com' },
-            { username: '', password: '2', first_name: 'd', middle_name: '', last_name: 'f', email: 'b@email.com' },
-            { username: 'u3', password: '3', first_name: 'g', middle_name: '', last_name: 'i', email: 'c@email.com' },
-            { username: '', password: '4', first_name: 'j', middle_name: '', last_name: 'l', email: 'd@email.com' },
-        ]
-        let requiredColumns = ['username', 'password', 'first_name', 'middle_name', 'last_name', 'email']
-        let fileColumns = ['username', 'password', 'first_name', 'middle_name', 'last_name', 'email']
-        let checkedColumns = this.columnChecker(fileColumns, requiredColumns)
+        // let data = [
+        //     { username: 'u1', password: '1', first_name: 'a', middle_name: 'b', last_name: 'c', email: 'a@email.com' },
+        //     { username: 'u2', password: '2', first_name: 'd', middle_name: '', last_name: 'f', email: 'b@email.com' },
+        //     { username: 'u2', password: '3', first_name: 'g', middle_name: '', last_name: 'i', email: 'c@email.com' },
+        //     { username: '', password: '4', first_name: 'j', middle_name: '', last_name: 'l', email: 'd@email.com' },
+        // ]
+        // let requiredColumns = ['username', 'password', 'first_name', 'middle_name', 'last_name', 'email']
+        // let fileColumns = ['username', 'password', 'first_name', 'middle_name', 'last_name', 'email']
+        // let checkedColumns = this.columnChecker(fileColumns, requiredColumns)
 
-        let summarizeData = this.summarizeData(data, requiredColumns)
+        // let summarizeData = this.summarizeData(data, checkedColumns)
         // console.table(summarizeData.finalizeData)
-        // console.table(checkedColumns)
-        console.table(data)
-        this.fetchUnitTest()
-    }
-
-    fetchUnitTest() {
-
-        axios.get('api/get-profile/'+ 1)
-        .then(({data})=> {
-            console.log(data)
-        })
-        .catch(err => err.response)        
+        // console.table(summarizeData.errorData)
     }
 
     summarizeData(data, requiredColumns) {
-        let invalidColumns = []
+        let errorData = []
         let finalizeData = []
 
         for (let items of data) {
 
-            let skipData = this.validateColumnData(items, requiredColumns)
+            let emptyRequiredFieldData = this.validateForEmptyData(items, requiredColumns)
 
-            if (skipData.result) {
-                invalidColumns.push(skipData.invalidColumns)
+            if (emptyRequiredFieldData.result) {
+                errorData.push(emptyRequiredFieldData.data)
+                continue
+            }
+
+            let duplicateData = this.checkForDuplicateData(items, data)
+
+            if (duplicateData.result) {
+                errorData.push(duplicateData.data)
                 continue
             }
 
@@ -66,7 +61,7 @@ class TestPage extends Component {
                 email: items.email,
             })
         }
-        return { finalizeData , invalidColumns }
+        return { finalizeData , errorData }
     }
 
     columnChecker(fileColumns, requiredColumns) {
@@ -77,14 +72,31 @@ class TestPage extends Component {
         return fileColumns
     }
 
-    validateColumnData(items, requiredColumns) {
-        for (let req of requiredColumns) {
-            items[req] = (req in items) ? items[req] : ''
+    checkForDuplicateData(currentData, extractedData) {
+        let uniqueData = ['email', 'username']
 
-            if (items[req].toString().trim().length <= 0 && req !== 'middle_name') {
+        for (let column of uniqueData) {
+            let checker = extractedData.filter(data => data[column] == currentData[column])
+
+            if (checker.length > 1) {
                 return {
                     result: true,
-                    invalidColumns: items.first_name + ' ' + items.last_name + ' ' + ' missing/empty fields.' 
+                    data: `${currentData.first_name} ${currentData.last_name} did not save because of duplicate fields in ${column}.`
+                }
+            }
+        }
+
+        return false
+    }
+
+    validateForEmptyData(currentData, requiredColumns) {
+        for (let column of requiredColumns) {
+            currentData[column] = (column in currentData) ? currentData[column] : ''
+
+            if (currentData[column].toString().trim().length <= 0 && column != 'middle_name') {
+                return {
+                    result: true,
+                    data: `${currentData.first_name} ${currentData.last_name} did not save because of missing/empty fields in ${column}.`
                 }
             }
         }
@@ -93,9 +105,6 @@ class TestPage extends Component {
 
 
     render() { 
-        
-        const { invalid, valid } = this.state;
-
         return (
             <React.Fragment>
                 <Container className='col-lg-8 col-md-8' >

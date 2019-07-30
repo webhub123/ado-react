@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { CustomInput, Card, CardHeader, CardBody, CardFooter, Form, FormText, FormFeedback, Alert, Button, Row, Container, Col, FormGroup, Label, Input } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
